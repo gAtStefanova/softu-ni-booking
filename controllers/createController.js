@@ -9,15 +9,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  
-    try {
+  try {
     const result = await create(req.body);
-    console.log(result);
-        res.redirect("/catalog/" + result.id);
-  } catch (error) {
-        res.render("create", {
+    res.redirect("/catalog/" + result.id);
+  } catch (err) {
+    res.render("create", {
       title: "Request Error",
+      error: err.message.split('\n')
     });
+    
   }
 });
 module.exports = router;

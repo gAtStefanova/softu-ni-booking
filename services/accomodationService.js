@@ -5,7 +5,7 @@ const data = JSON.parse(fs.readFileSync(fileName));
 
 async function persist() {
   return new Promise((res, rej) => {
-    fs.writeFile(fileName, JSON.stringify(data), (err) => {
+    fs.writeFile(fileName, JSON.stringify(data, null, 2), (err) => {
       if (err == null) {
         res();
       } else {
@@ -15,20 +15,29 @@ async function persist() {
   });
 }
 
-function getAll() {
-  return data;
+function getAll(search, city, fromPrice, toPrice) {
+  search = search.toLowerCase();
+  return data
+  .filter((r) =>r.name.toLowerCase().includes(search) ||r.description.toLowerCase().includes(search))
+  .filter((r) =>r.city.toLowerCase().includes(city.toLowerCase()))
+  .filter((r) =>r.price>=fromPrice && r.price<=toPrice)
 }
 async function create(roomData) {
   const room = {
     id: getId(),
     name: roomData.name,
-    description:roomData.description,
-    city:roomData.city,
-    beds:Number(roomData.beds),
-    price:Number(roomData.price),
-    imgUrl:roomData.imgUrl,
+    description: roomData.description,
+    city: roomData.city,
+    beds: Number(roomData.beds),
+    price: Number(roomData.price),
+    imgUrl: roomData.imgUrl,
   };
-  data.push(room)
+  const missing = Object.entries(room).filter(([k, v]) => !v);
+
+  if (missing.length > 0) {
+    throw new Error(missing.map((m) => `${m[0]} is required!`).join("\n"));
+  }
+  data.push(room);
   await persist();
   return room;
 }
