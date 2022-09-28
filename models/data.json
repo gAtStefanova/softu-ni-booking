@@ -1,10 +1,1 @@
-[
-  {
-    "id":"1234",
-    "name":"Room",
-    "description":"Nice and cozy",
-    "city":"Sofia",
-    "beds":2,
-    "price":130
-  }  
-]
+[{"id":"1234","name":"Room","description":"Nice and cozy","city":"Sofia","beds":2,"price":130,"imgUrl":"/static/assets/room1.jpg"},{"id":"020923","name":"","description":"","city":"","beds":0,"price":0,"imgUrl":""},{"id":"0c2dbd","name":"Hotel Room","description":"123","city":"Pernik","beds":123,"price":123,"imgUrl":"/static/assets/room2.jpg"}]
