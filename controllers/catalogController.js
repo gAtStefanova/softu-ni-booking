@@ -26,17 +26,14 @@ router.get("/:id", async (req, res) => {
   if (room) {
     res.render("details", {
       title: "Accomodation Details",
-      room,
+      room
     });
   } else {
     res.render("roomNotFound", {
       title: "Accomodation Details",
-      roomId,
+      roomId
     });
   }
-  res.render("details", {
-    title: "Accomodation Details",
-  });
-});
+ });
 
 module.exports = router;
