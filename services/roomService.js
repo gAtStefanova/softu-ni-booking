@@ -4,7 +4,7 @@ function getAll(search, city, fromPrice, toPrice) {
   return Room.find({}).lean();
 }
 function getById(id) {
-  return Room.findById(id).lean();
+  return Room.findById(id).populate('facilities','label iconUrl').lean();
 }
 
 async function create(roomData) {
